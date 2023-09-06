@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class BaseballApplication
 
 fun main(args: Array<String>) {
-	runApplication<BaseballApplication>(*args)
+	runApplication<BaseballApplication>(*args) //testing
 }
