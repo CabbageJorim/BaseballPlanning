@@ -11,6 +11,7 @@
 - Spring boot: 2.7.15
 - Spring framework: 5.3.29
 - Java JDK: 11.0.18
+- Kotlin
 - JPA
 
 ### License
