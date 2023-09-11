@@ -1,9 +1,7 @@
 package com.plan.baseball.model.dto.user_info
 
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.Calendar
-import java.util.Date
 import javax.persistence.*
 
 @Entity
