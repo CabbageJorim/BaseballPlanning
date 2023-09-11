@@ -21,7 +21,7 @@ class TestController(
     fun sendPage(): String{
         return "send"
     }
-    @PostMapping("/sms/send")
+    @PostMapping("/sms/sends")
     fun sendSms(messageDTO: MessageDTO, model:Model): String{
         println(messageDTO.toString())
         val response: SmsResponseDTO? = smsService.sendSms(messageDTO)

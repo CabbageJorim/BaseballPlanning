@@ -19,7 +19,24 @@ function isConfirmPassword(){
         document.querySelector('#account_password').value === document.querySelector('#account_c_password').value;
 }
 
-function JSONData(){
+function JSONTelData(){
+    return ({
+        to: document.querySelector('#account_tel').value,
+        content:"Script Test"
+    });
+}
+
+function messageSend(){
+    console.log(JSONTelData())
+    axios.post(`/sms/send`, JSONTelData())
+        .then(response => {
+            console.log(response.data)
+        }).catch(error => {
+            console.error(error)
+        })
+}
+
+function JSONRegisterData(){
     return ({
         email: document.querySelector('#account_email').value,
         password: document.querySelector('#account_password').value,
@@ -30,8 +47,7 @@ function JSONData(){
 }
 
 function registerButton(){
-    console.log(JSONData())
-    axios.post(`/register`, JSONData())
+    axios.post(`/register`, JSONRegisterData())
         .then(response => {
 
         }).catch(error => {
