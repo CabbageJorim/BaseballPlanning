@@ -17,6 +17,9 @@ import java.net.URI
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
+/**
+ * 휴대폰 인증번호를 생성하고 전송할 때에 사용됩니다.
+ */
 @Service
 class MobileService(
     @Value("\${naver-cloud-sms.accessKey}")

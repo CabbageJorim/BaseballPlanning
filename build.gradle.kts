@@ -26,7 +26,7 @@ dependencies {
 
 	//implementation("org.springframework.boot:spring-boot-starter-security")
 
-	implementation("org.apache.httpcomponents:httpclient:4.5.13")
+	implementation("org.apache.httpcomponents:httpclient:4.5.14")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
