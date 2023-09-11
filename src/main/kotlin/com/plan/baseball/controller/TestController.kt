@@ -1,8 +1,8 @@
 package com.plan.baseball.controller
 
-import com.plan.baseball.model.dto.MessageDTO
-import com.plan.baseball.model.dto.SmsResponseDTO
-import com.plan.baseball.model.service.MobileService
+import com.plan.baseball.model.dto.sms.MessageDTO
+import com.plan.baseball.model.dto.sms.SmsResponseDTO
+import com.plan.baseball.model.service.SmsService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping
 
 @Controller
 class TestController(
-    private val smsService: MobileService
+    private val smsService: SmsService
 ) {
     @GetMapping("/")
     fun testPage():String{

@@ -1,4 +1,4 @@
-package com.plan.baseball.model.dto
+package com.plan.baseball.model.dto.sms
 
 import java.time.LocalDateTime
 

@@ -4,6 +4,7 @@ import java.time.LocalDateTime
 import java.util.Calendar
 import javax.persistence.*
 
+//TODO: 2023.09.11 Entity 생성 후 문제 발생 시 연락주세요. - Jorim
 @Entity
 data class UserInfo(
     @Id
@@ -18,6 +19,6 @@ data class UserInfo(
     @Column(nullable = false, length = 13)
     val tel:String,
     @Column(nullable = false)
-    val createDate:LocalDateTime
+    var createDate:LocalDateTime?
 ) {
 }

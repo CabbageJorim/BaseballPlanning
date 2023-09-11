@@ -1,4 +1,4 @@
-package com.plan.baseball.model.dto
+package com.plan.baseball.model.dto.sms
 
 data class SmsRequestDTO(
     val type:String,

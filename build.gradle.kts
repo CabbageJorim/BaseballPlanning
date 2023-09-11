@@ -28,12 +28,11 @@ dependencies {
 
 	implementation("org.apache.httpcomponents:httpclient:4.5.14")
 
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
+	implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.20-RC")
+	runtimeOnly("org.mariadb.jdbc:mariadb-java-client:3.1.2")
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks.withType<KotlinCompile> {

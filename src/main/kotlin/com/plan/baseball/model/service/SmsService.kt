@@ -1,9 +1,9 @@
 package com.plan.baseball.model.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.plan.baseball.model.dto.MessageDTO
-import com.plan.baseball.model.dto.SmsRequestDTO
-import com.plan.baseball.model.dto.SmsResponseDTO
+import com.plan.baseball.model.dto.sms.MessageDTO
+import com.plan.baseball.model.dto.sms.SmsRequestDTO
+import com.plan.baseball.model.dto.sms.SmsResponseDTO
 import org.apache.tomcat.util.codec.binary.Base64
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpEntity
@@ -21,7 +21,7 @@ import javax.crypto.spec.SecretKeySpec
  * 휴대폰 인증번호를 생성하고 전송할 때에 사용됩니다.
  */
 @Service
-class MobileService(
+class SmsService(
     @Value("\${naver-cloud-sms.accessKey}")
     private val accessKey:String,
     @Value("\${naver-cloud-sms.secretKey}")

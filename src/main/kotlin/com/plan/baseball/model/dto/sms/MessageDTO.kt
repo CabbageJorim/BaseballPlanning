@@ -1,6 +1,4 @@
-package com.plan.baseball.model.dto
-
-import javax.persistence.Entity
+package com.plan.baseball.model.dto.sms
 
 data class MessageDTO(
     val to:String,
