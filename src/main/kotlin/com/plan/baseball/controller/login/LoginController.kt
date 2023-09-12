@@ -19,7 +19,7 @@ class LoginController {
      */
     @GetMapping("/login")
     fun login(): String {
-        return "login" // login.html 연결
+        return "account/login" // login.html 연결
     }
 
     /**
@@ -39,6 +39,6 @@ class LoginController {
             model.addAttribute("msg", "로그인 실패!")
         }
 
-        return "login"
+        return "account/login"
     }
 }
