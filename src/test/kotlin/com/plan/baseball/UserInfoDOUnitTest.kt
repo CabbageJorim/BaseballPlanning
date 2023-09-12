@@ -1,6 +1,6 @@
 package com.plan.baseball
 
-import com.plan.baseball.model.dto.user_info.UserInfo
+import com.plan.baseball.model.dto.user_info.UserInfoDO
 import com.plan.baseball.model.dto.user_info.UserInfoRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,13 +9,13 @@ import java.time.LocalDateTime
 import java.util.*
 
 @SpringBootTest
-class UserInfoUnitTest(
+class UserInfoDOUnitTest(
     @Autowired
     val userInfoRepository: UserInfoRepository
 ) {
     @Test
     fun create(): Unit {
-        val userData = UserInfo(
+        val userData = UserInfoDO(
             "Test@naver.com", "1234", "Jorim", getCalendar(2000, 3, 30),"01085945142", LocalDateTime.now()
         )
         userInfoRepository.save(userData)

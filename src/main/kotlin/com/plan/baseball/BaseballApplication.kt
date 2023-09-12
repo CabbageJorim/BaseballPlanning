@@ -2,11 +2,9 @@ package com.plan.baseball
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.web.servlet.config.annotation.EnableWebMvc
 
 @SpringBootApplication
 class BaseballApplication
-
 fun main(args: Array<String>) {
 	runApplication<BaseballApplication>(*args) //testing
 }
