@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="${headTitle}"></title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/javascript/account.js"></script>
+</head>
+<body>
+    <p>email</p>
+    <input type="email" id="account_email">
+    <p>passwords</p>
+    <input type="password" id="account_password" onfocusout="isRegularPassword()">
+    <input type="password" id="account_c_password" onfocusout="isConfirmPassword()">
+    <span id="passwordResult"></span>
+    <p>name</p>
+    <input type="text" id="account_name">
+    <p>birth</p>
+    <input type="date" id="account_birth">
+    <p>phone</p>
+    <input type="tel" id="account_tel">
+    <button type="button" onclick="messageSend()">인증</button>
+    <p></p>
+    <button type="button" onclick="registerButton()">확인</button>
+</body>
+</html>

@@ -13,7 +13,6 @@ group = "com.plan"
 version = "0.0.1-SNAPSHOT"
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_11
 }
 
 repositories {
@@ -23,14 +22,20 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
-	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	runtimeOnly("org.mariadb.jdbc:mariadb-java-client")
+	//implementation("org.springframework.boot:spring-boot-starter-batch")
+	//implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.jsoup:jsoup:1.16.1")
+
+	implementation("org.apache.httpcomponents:httpclient:4.5.14")
+
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
+	implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.20-RC")
+	runtimeOnly("org.mariadb.jdbc:mariadb-java-client:3.1.2")
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.batch:spring-batch-test")
 }
 
 tasks.withType<KotlinCompile> {
@@ -42,4 +47,7 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+kotlin {
+	jvmToolchain(11)
 }
