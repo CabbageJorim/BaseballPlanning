@@ -9,17 +9,16 @@ import javax.persistence.*
 @Table(name = "USER_INFO")
 data class UserInfoDO(
     @Id
-    @Column(length = 256, name = "email")
+    @Column(length = 256, name = "EMAIL")
     val email:String,
-    @Column(nullable = false, length = 512, name = "password")
+    @Column(nullable = false, length = 512, name = "PASSWORD")
     var password:String,
-    @Column(nullable = false, length = 21, name = "name")
+    @Column(nullable = false, length = 21, name = "NAME")
     val name:String,
-    @Column(nullable = false, columnDefinition = "DATE", name = "birth")
+    @Column(nullable = false, columnDefinition = "DATE", name = "BIRTH")
     val birth:Calendar,
-    @Column(nullable = false, length = 13, name = "tel")
+    @Column(nullable = false, length = 13, name = "TEL", unique = true)
     val tel:String,
-    @Column(nullable = false, name = "createDate")
+    @Column(nullable = false, name = "CREATEDATE")
     var createDate:LocalDateTime?
-) {
-}
+)
