@@ -4,7 +4,6 @@ import java.time.LocalDateTime
 import java.util.Calendar
 import javax.persistence.*
 
-//TODO: 2023.09.11 Entity 생성 후 문제 발생 시 연락주세요. - Jorim
 @Entity
 @Table(name = "USER_INFO")
 data class UserInfoDO(
