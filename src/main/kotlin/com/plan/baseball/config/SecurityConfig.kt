@@ -21,8 +21,6 @@ import org.springframework.security.web.savedrequest.RequestCache
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val userDetailsService: CustomUserDetailService,
-    private val customAuthenticationProvider: CustomAuthenticationProvider,
     @Autowired
     private val customAuthenticationSuccessHandler: CustomAuthenticationSuccessHandler,
     @Autowired
