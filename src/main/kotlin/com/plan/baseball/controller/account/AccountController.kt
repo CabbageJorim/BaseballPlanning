@@ -1,11 +1,13 @@
 package com.plan.baseball.controller.account
 
+import com.plan.baseball.model.dto.mail.RequestMailDO
 import com.plan.baseball.model.service.AccountService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 
 @Controller
 class AccountController(
@@ -44,5 +46,10 @@ class AccountController(
             model.addAttribute("msg", "회원님의 email은 ${userInfoDO.email} 입니다")
             return "account/findEmailResult"
         }
+    }
+
+    @GetMapping("/account/test")
+    fun mailTest(): String{
+        return "account/mailTest"
     }
 }
