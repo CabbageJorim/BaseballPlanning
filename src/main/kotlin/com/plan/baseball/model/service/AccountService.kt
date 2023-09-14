@@ -23,8 +23,4 @@ class AccountService(
     fun selectByTel(tel: String): UserInfoDO? {
         return userInfoRepository.findByTel(tel)
     }
-
-    fun dupTelCheck(tel:String): UserInfoDO?{
-        return userInfoRepository.findByTel(tel)
-    }
 }
