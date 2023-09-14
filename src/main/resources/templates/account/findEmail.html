@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <title>아이디 찾기</title>
+    <script th:src="@{/javascript/authTel.js}"></script>
+</head>
+<body>
+<form th:action="@{/findEmail}" method="POST">
+    <p>phone</p>
+    <input type="tel" id="account_tel" name="tel">
+    <button type="button" onclick="messageSend()">인증</button>
+
+    <input type="number" id="authNum">
+    <button type="submit">확인</button>
+    <br />
+    [[${msg}]]
+</form>
+</body>
+</html>

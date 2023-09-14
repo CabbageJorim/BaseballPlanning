@@ -6,18 +6,17 @@
 <head>
   <meta charset="UTF-8">
   <title>로그인</title>
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans KR&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <main>
-    <form method="post" th:action = "@{/login}" id="loginForm" name="loginForm" >
+    <form method="post" th:action = "@{/login/action}" id="loginForm" name="loginForm" >
       <h1 class="loginText">로그인</h1>
       <div class=box>
         <div class=totalBox>
           <span class="titleText">아이디</span>
           <span class=inputBox>
-            <input type="email" id="email" class="id" name="email" placeholder="아이디를 입력하세요" required>
+            <input type="email" id="email" class="id" name="username" placeholder="아이디를 입력하세요" required>
           </span>
         </div>
       </div>
@@ -30,12 +29,12 @@
         </div>
       </div>
       <button type="submit" class=loginButton>로그인</button>
-      <p>[[${msg}]]</p>
+      <p th:if="${param.error}">아이디 또는 비밀번호를 확인하세요.</p>
 
       <div class=moveNextPage>
         <ul>
           <li><a th:href="@{/account}">회원가입</a></li>
-          <li><a th:href="@{/find_id}">아이디 찾기</a></li>
+          <li><a th:href="@{/findEmail}">아이디 찾기</a></li>
           <li><a th:href="@{/find_password}">비밀번호 찾기</a></li>
         </ul>
       </div>

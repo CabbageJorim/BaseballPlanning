@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title th:text="${headTitle}"></title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/javascript/account.js"></script>
+    <script th:src="@{/javascript/account.js}"></script>
+    <script th:src="@{/javascript/authTel.js}"></script>
 </head>
 <body>
     <p>email</p>
