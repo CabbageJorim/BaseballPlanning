@@ -11,17 +11,17 @@
 </head>
 <body>
     <p>email</p>
-    <input type="email" id="account_email">
+        <input type="email" id="account_email">
     <p>passwords</p>
-    <input type="password" id="account_password" onfocusout="isRegularPassword()">
-    <input type="password" id="account_c_password" onfocusout="isConfirmPassword()">
-    <span id="passwordResult"></span>
+        <input type="password" id="account_password" onfocusout="showPasswordResult()">
+        <input type="password" id="account_c_password" onfocusout="showPasswordResult()">
+            <span id="passwordResult" style="color:red"></span>
     <p>name</p>
-    <input type="text" id="account_name">
+        <input type="text" id="account_name" oninput="nameHangul(this)">
     <p>birth</p>
-    <input type="date" id="account_birth">
+        <input type="date" id="account_birth">
     <p>phone</p>
-    <input type="tel" id="account_tel">
+        <input type="tel" id="account_tel" oninput="addTelHyphen(this)">
     <button type="button" onclick="messageSend()">인증</button>
     <p></p>
     <button type="button" onclick="registerButton()">확인</button>
