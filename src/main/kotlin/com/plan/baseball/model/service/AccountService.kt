@@ -23,4 +23,8 @@ class AccountService(
 
         return user != null && password == user.password
     }
+
+    fun dupTelCheck(tel:String): UserInfoDO?{
+        return userInfoRepository.findByTel(tel)
+    }
 }

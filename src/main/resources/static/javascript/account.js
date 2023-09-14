@@ -1,5 +1,5 @@
 //Front Logics are completed! - 2023-09-14
-var passwordResult;
+var passwordResult, answerCode;
 window.onload = function(){
     init()
 }
@@ -33,13 +33,7 @@ function showPasswordResult(){
     }
 
 
-}
 
-function JSONTelData(){
-    return ({
-        to: document.querySelector('#account_tel').value,
-        content:"Script Test"
-    });
 }
 
 function addTelHyphen(target){
@@ -49,14 +43,53 @@ function addTelHyphen(target){
                         .replace(/(\-{1,2})$/g, "");
 }
 
+function JSONTelData(){
+    return ({
+        to: document.querySelector('#account_tel').value.replace(/-/g, ''),
+        content: ""
+    });
+}
+
 function messageSend(){
-    console.log(JSONTelData())
-    axios.post(`/sms/send`, JSONTelData())
-        .then(response => {
-            console.log(response.data)
-        }).catch(error => {
-            console.error(error)
-        })
+    var jsonData = JSONTelData();
+    function createCode(){
+        axios.get(`/sms/code`)
+            .then(response => {
+                answerCode = String(response.data);
+                jsonData.content = `인증번호: ${response.data}`;
+            }).catch(error => {
+                console.error(error);
+            })
+        .then(
+            function(){
+                if(jsonData.content.length !== 0){
+                    sendCode()
+                }
+            }
+        )
+    }
+
+    function sendCode(){
+        axios.post(`/sms/send`, jsonData)
+            .then(response => {
+
+            }).catch(error => {
+                console.error(error);
+            })
+    }
+
+    axios.get(`/sms/check-dup?tel=${jsonData.to}`)
+    .then(response => {
+
+        if(response.data === ""){
+            createCode();
+        }
+    })
+}
+
+function checkCode(){
+    document.querySelector('#account_telAuthResult').innerHTML =
+    (answerCode === document.querySelector('#account_telAuth').value)
 }
 
 function JSONRegisterData(){
@@ -72,7 +105,10 @@ function JSONRegisterData(){
 function registerButton(){
     axios.post(`/register`, JSONRegisterData())
         .then(response => {
-
+            if(response.data){
+                alert('회원가입에 성공했습니다.')
+                window.location.href='/login';
+            }
         }).catch(error => {
             console.error(error)
         })
