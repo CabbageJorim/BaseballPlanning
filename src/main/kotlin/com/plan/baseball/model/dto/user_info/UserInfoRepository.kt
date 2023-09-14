@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserInfoRepository:JpaRepository<UserInfoDO, String> {
     fun findByEmail(email:String):UserInfoDO?
+    fun findByTel(tel:String):UserInfoDO?
 }

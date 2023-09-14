@@ -2,6 +2,7 @@ package com.plan.baseball
 
 import com.plan.baseball.model.dto.user_info.UserInfoDO
 import com.plan.baseball.model.dto.user_info.UserInfoRepository
+import com.plan.baseball.model.service.SmsService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -41,5 +42,11 @@ class UserInfoDOUnitTest(
     fun delete(): Unit{
         userInfoRepository.deleteById("Test@naver.com")
         println("Delete Fin")
+    }
+
+    @Test
+    fun uuid(){
+        val smsService = SmsService("1","1","1","1")
+        println(smsService.createCode())
     }
 }
