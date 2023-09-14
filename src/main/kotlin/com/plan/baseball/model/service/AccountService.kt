@@ -8,15 +8,17 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class AccountService(
-    private val userInfoRepository: UserInfoRepository
+    private val userInfoRepository: UserInfoRepository,
+    private val passwordEncoder:PasswordEncoder
 ) {
     fun register(userInfoDO: UserInfoDO){
         //TODO: passwordEncoding 변환
-        userInfoDO.password = (userInfoDO.password)
+        userInfoDO.password = passwordEncoder.encode(userInfoDO.password)
         userInfoRepository.save(userInfoDO)
     }
 

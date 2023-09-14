@@ -28,6 +28,6 @@ class SmsRestApi(
 
     @GetMapping("/sms/check-dup")
     fun checkDup(@RequestParam tel:String): UserInfoDO? {
-        return accountService.dupTelCheck(tel)
+        return accountService.selectByTel(tel)
     }
 }
