@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.plan.baseball.model.dto.sms.MessageDTO
 import com.plan.baseball.model.dto.sms.SmsRequestDTO
 import com.plan.baseball.model.dto.sms.SmsResponseDTO
+import com.plan.baseball.model.dto.user_info.UserInfoDO
 import org.apache.tomcat.util.codec.binary.Base64
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpEntity
@@ -14,8 +15,10 @@ import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import java.lang.StringBuilder
 import java.net.URI
+import java.security.SecureRandom
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
+import kotlin.collections.ArrayList
 
 /**
  * 휴대폰 인증번호를 생성하고 전송할 때에 사용됩니다.
@@ -85,5 +88,11 @@ class SmsService(
             httpBody,
             SmsResponseDTO::class.java
         )
+    }
+
+    fun createCode(): String {
+        val secureRandom: SecureRandom = SecureRandom();
+        println(secureRandom.algorithm)
+        return (1..6).joinToString("") { secureRandom.nextInt(9).toString() }
     }
 }
