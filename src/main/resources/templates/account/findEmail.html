@@ -5,15 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <title>아이디 찾기</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script th:src="@{/javascript/authTel.js}"></script>
 </head>
 <body>
 <form th:action="@{/findEmail}" method="POST">
     <p>phone</p>
-    <input type="tel" id="account_tel" name="tel">
-    <button type="button" onclick="messageSend()">인증</button>
-
-    <input type="number" id="authNum">
+    <input type="tel" id="account_tel" oninput="addTelHyphen(this)" name="tel">
+    <button type="button" onclick="messageSend()">휴대폰 인증</button>
+    <input type="number" id="account_telAuth" >
+    <button type="button" onclick="checkCode()">인증</button>
+    <span id="account_telAuthResult"></span>
     <button type="submit">확인</button>
     <br />
     [[${msg}]]

@@ -1,16 +1,16 @@
 package com.plan.baseball.config
 
-import org.springframework.context.annotation.Lazy
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Component
 
 @Component
 class CustomAuthenticationProvider(
     private val userDetailsService: CustomUserDetailService,
+    private val passwordEncoder: PasswordEncoder
 ) : AuthenticationProvider {
 
     override fun authenticate(authentication: Authentication): Authentication {
@@ -19,7 +19,7 @@ class CustomAuthenticationProvider(
 
         val userDetails = userDetailsService.loadUserByUsername(username)
 
-        if (password == userDetails.password) {
+        if (passwordEncoder.matches(password, userDetails.password)) {
             val authorities = userDetails.authorities
             return UsernamePasswordAuthenticationToken(userDetails, password, authorities)
         } else {
