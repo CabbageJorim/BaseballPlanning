@@ -55,9 +55,6 @@ function showPasswordResult(){
     } else {
         passwordResult.innerHTML = '';
     }
-
-
-
 }
 
 function JSONRegisterData(){

@@ -6,18 +6,21 @@ import com.plan.baseball.model.service.SmsService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.LocalDateTime
 import java.util.*
 
 @SpringBootTest
 class UserInfoDOUnitTest(
     @Autowired
-    val userInfoRepository: UserInfoRepository
+    val userInfoRepository: UserInfoRepository,
+    @Autowired
+    val passwordEncoder:PasswordEncoder
 ) {
     @Test
     fun create(): Unit {
         val userData = UserInfoDO(
-            "Test@naver.com", "1234", "Jorim", getCalendar(2000, 3, 30),"01085945142", LocalDateTime.now()
+            "wkdgyfla97@naver.com", passwordEncoder.encode("1234"), "Jorim", getCalendar(2000, 3, 30),"01085945143", LocalDateTime.now()
         )
         userInfoRepository.save(userData)
     }
