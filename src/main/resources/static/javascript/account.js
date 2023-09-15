@@ -1,4 +1,3 @@
-//Front Logics are completed! - 2023-09-14
 var passwordResult, answerCode;
 window.onload = function(){
     init()
@@ -6,6 +5,29 @@ window.onload = function(){
 
 function init(){
     passwordResult = document.querySelector('#passwordResult');
+    emailResult = document.querySelector('#account_emailResult')
+}
+
+function checkEmailReg(target){
+    var regex = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    return regex.test(target.value)
+}
+
+function emailCheck(target){
+    if(!checkEmailReg(target)){
+        emailResult.innerHTML = '이메일 형식을 확인해주세요';
+        return ;
+    }else{
+        emailResult.innerHTML = '';
+    }
+
+    axios.get(`/account/api/email-dup?email=${target.value}`)
+        .then(response => {
+            (response.data === "") ?
+                emailResult.innerHTML = '사용가능한 이메일입니다.' : emailResult.innerHTML = '중복된 이메일입니다.';
+        }).catch(error => {
+            console.error(error);
+    });
 }
 
 function nameHangul(target){
@@ -20,7 +42,8 @@ function isRegularPassword(){
 }
 
 function isConfirmPassword(){
-    return document.querySelector('#account_password').value === document.querySelector('#account_c_password').value;
+    return document.querySelector('#account_password').value
+                === document.querySelector('#account_c_password').value;
 }
 
 function showPasswordResult(){
@@ -52,6 +75,7 @@ function JSONTelData(){
 
 function messageSend(){
     var jsonData = JSONTelData();
+
     function createCode(){
         axios.get(`/sms/code`)
             .then(response => {
@@ -80,7 +104,6 @@ function messageSend(){
 
     axios.get(`/sms/check-dup?tel=${jsonData.to}`)
     .then(response => {
-
         if(response.data === ""){
             createCode();
         }
@@ -103,7 +126,7 @@ function JSONRegisterData(){
 }
 
 function registerButton(){
-    axios.post(`/register`, JSONRegisterData())
+    axios.post(`/account/api/register`, JSONRegisterData())
         .then(response => {
             if(response.data){
                 alert('회원가입에 성공했습니다.')

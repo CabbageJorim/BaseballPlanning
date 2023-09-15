@@ -18,4 +18,8 @@ class AccountService(
     fun selectByTel(tel: String): UserInfoDO? {
         return userInfoRepository.findByTel(tel)
     }
+
+    fun selectByEmail(email:String): UserInfoDO?{
+        return userInfoRepository.findByEmail(email)
+    }
 }

@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+/**
+ * 이메일 인증 번호 발송에 한 함
+ */
 class MailRestApi(
     private val mailService: MailService
 ) {
