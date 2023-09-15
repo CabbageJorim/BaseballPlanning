@@ -27,6 +27,7 @@ dependencies {
 	//implementation("org.springframework.boot:spring-boot-starter-batch")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.jsoup:jsoup:1.16.1")
+	implementation("org.springframework.boot:spring-boot-starter-mail")
 
 	implementation("org.apache.httpcomponents:httpclient:4.5.14")
 
@@ -35,7 +36,7 @@ dependencies {
 	runtimeOnly("org.mariadb.jdbc:mariadb-java-client:3.1.2")
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testImplementation("org.springframework.batch:spring-batch-test")
+	//testImplementation("org.springframework.batch:spring-batch-test")
 }
 
 tasks.withType<KotlinCompile> {

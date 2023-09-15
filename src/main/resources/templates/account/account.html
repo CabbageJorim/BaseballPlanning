@@ -12,7 +12,8 @@
 </head>
 <body>
     <p>email</p>
-        <input type="email" id="account_email">
+        <input type="email" id="account_email" onfocusout="emailCheck(this)">
+    <span id="account_emailResult"></span>
     <p>passwords</p>
         <input type="password" id="account_password" onfocusout="showPasswordResult()">
         <input type="password" id="account_c_password" onfocusout="showPasswordResult()">
