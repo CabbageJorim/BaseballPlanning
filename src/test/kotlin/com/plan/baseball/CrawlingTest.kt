@@ -10,7 +10,7 @@ class CrawlingTest(
 ) {
     @Test
     fun crawlingTeam(){
-        val crawlingService = CrawlingService("http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106")
-        println(crawlingService.create())
+        val crawlingService = CrawlingService("http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=2022")
+        crawlingService.loadBatterData()
     }
 }
