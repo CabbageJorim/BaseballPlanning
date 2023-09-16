@@ -22,4 +22,22 @@ class AccountService(
     fun selectByEmail(email:String): UserInfoDO?{
         return userInfoRepository.findByEmail(email)
     }
+
+    fun modify(data: HashMap<String, String>): Int {
+        var result:Int
+        try {
+            val userInfo = data["email"]?.let { userInfoRepository.findByEmail(it) }
+            if (userInfo != null){
+                userInfo.password = passwordEncoder.encode(data["password"])
+                userInfoRepository.save(userInfo)
+                result = 1
+            }else{
+                result = 0
+            }
+        }catch (e:Exception){
+            result = -1
+            print(e.message)
+        }
+        return result
+    }
 }

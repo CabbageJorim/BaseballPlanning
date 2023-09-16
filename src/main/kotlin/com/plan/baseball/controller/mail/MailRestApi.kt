@@ -17,7 +17,6 @@ class MailRestApi(
 ) {
     @PostMapping("/mail/send-code")
     fun sendCode(@RequestBody data: RequestMailDO):String{
-        println(data.email)
         return mailService.validateMail(data.email)
     }
 }

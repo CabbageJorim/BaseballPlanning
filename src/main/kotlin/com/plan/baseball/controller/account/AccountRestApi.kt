@@ -4,6 +4,7 @@ import com.plan.baseball.model.dto.user_info.UserInfoDO
 import com.plan.baseball.model.service.AccountService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
@@ -27,5 +28,10 @@ class AccountRestApi(
     @GetMapping("/email-dup")
     fun emailDupCheck(@RequestParam email:String): UserInfoDO?{
         return accountService.selectByEmail(email)
+    }
+
+    @PutMapping("/change-pw")
+    fun passwordChange(@RequestBody data:HashMap<String, String>): Int{
+        return accountService.modify(data);
     }
 }
