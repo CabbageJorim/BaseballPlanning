@@ -11,6 +11,6 @@ class CrawlingTest(
     @Test
     fun crawlingTeam(){
         val crawlingService = CrawlingService("http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106")
-        println(crawlingService.crawlingTeamTableOptions())
+        println(crawlingService.create())
     }
 }

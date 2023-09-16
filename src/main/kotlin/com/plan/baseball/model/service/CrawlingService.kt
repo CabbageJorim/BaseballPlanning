@@ -4,31 +4,37 @@
 package com.plan.baseball.model.service
 
 import org.jsoup.Jsoup
-import org.jsoup.nodes.Element
+import java.io.BufferedWriter
+import java.io.FileWriter
+import java.lang.StringBuilder
 
 class CrawlingService(
     private var teamURL: String
 ) {
-    private fun getTrsInTable(tableList: List<Element>): List<Element> {
-        var trList:List<Element> = emptyList()
-        for(table in tableList){
-            trList = table.select("tr")
-        }
-        return trList
-    }
+    fun create(){
+        val doc = Jsoup.connect(this.teamURL).get()
+        val table = doc.select("table")
 
-    fun crawlingTeamTableOptions():String{
-        var result = ""
-        try{
-            val doc = Jsoup.connect(this.teamURL).get()
-            val tableList: List<Element> = doc.select("table")
-            for(tr in getTrsInTable(tableList)){
-                result += tr.select("td").text()
+        val rowList = table.select("tr")
+        for (row in rowList){
+            val cellList = row.select("th") + row.select("td")
+            val csvLine = StringBuilder()
+
+            for(cell in cellList){
+                csvLine.append(cell.text()).append(",")
             }
-        }catch (_:Exception){
+            csvLine.deleteCharAt(csvLine.length - 1)
+            val itemList = csvLine.split(",")
 
-        }.toString()
+            when{
+                (itemList[0] == "순위") -> continue
+                else -> {
+                    println(itemList)
+                    println("line lastIndex: ${itemList.lastIndex}")
+                    println("line size: ${itemList.size}" )
+                }
+            }
+        }
 
-        return result
     }
 }
