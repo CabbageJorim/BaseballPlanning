@@ -9,7 +9,7 @@ data class BatterDetailSeasonRecord (
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
-    @ManyToOne(targetEntity = UserInfoDO::class, fetch = FetchType.LAZY)
+    @ManyToOne(targetEntity = UserInfoDO::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name="EMAIL")
     val userInfoDO: UserInfoDO,
 
