@@ -24,16 +24,16 @@ class CrawlingService(
             val itemList = csvLine.split(",")
             println(itemList)
 
-//            when{
-//                (itemList[0] == "순위") -> continue
-//                else -> {
-//                    //val nameSplit = itemList[1].split("(")
-//                    //println(nameSplit[0])
-//                    //println(nameSplit[1].substring(0,nameSplit[1].length-1))
-//                    println("line lastIndex: ${it샛emList.lastIndex}")
-//                    println("line size: ${itemList.size}")
-//                }
-//            }
+            when{
+                (itemList[0] == "순위") -> continue
+                else -> {
+                    val nameSplit = itemList[1].split("(")
+                    println(nameSplit[0])
+                    println(nameSplit[1].substring(0,nameSplit[1].length-1))
+                    println("line lastIndex: ${itemList.lastIndex}")
+                    println("line size: ${itemList.size}")
+                }
+            }
         }
 
     }

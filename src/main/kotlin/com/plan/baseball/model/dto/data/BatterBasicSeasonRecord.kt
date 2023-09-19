@@ -1,5 +1,6 @@
 package com.plan.baseball.model.dto.data
 
+import com.plan.baseball.model.dto.team.Entry
 import com.plan.baseball.model.dto.user_info.UserInfoDO
 import javax.persistence.*
 
@@ -9,9 +10,9 @@ data class BatterBasicSeasonRecord(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long? = 0L, //고작해봐야 이건데, 이거 알아내는데 시간 너무 먹었습니다ㅠㅠㅠㅠ
 
-    @ManyToOne(targetEntity = UserInfoDO::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name="EMAIL", nullable = false)
-    val userInfoDO: UserInfoDO,
+    @ManyToOne(targetEntity = Entry::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @JoinColumn(name="ENTRY_ID", nullable = false)
+    val entry: Entry,
 
     @Column(name="GAME", nullable = false)
     val game:Int,   //출장수
