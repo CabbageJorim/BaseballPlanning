@@ -13,5 +13,9 @@ data class UserTeamDO(
     val userInfoDO: UserInfoDO,
     @OneToOne(targetEntity = TeamDO::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name="TEAM_ID", nullable = false)
-    val teamDO: TeamDO
+    val teamDO: TeamDO,
+    @Column(nullable = false, length = 20, name = "ROLE")
+    val role: String,
+    @Column(nullable = false)
+    val backNumber: Int
 )

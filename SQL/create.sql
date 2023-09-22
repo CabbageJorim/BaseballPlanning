@@ -4,3 +4,6 @@
     BIRTH       VARCHAR(10)                 NOT NULL,
     TEL         VARCHAR(13)                 NOT NULL,
     CREATE_DATE DATE        DEFAULT CURRENT_DATE NOT NULL,
+
+    SELECT * FROM USER_TEAM
+    WHERE BACKNUMBER = '10' AND

@@ -2,6 +2,7 @@ package com.plan.baseball
 
 import com.plan.baseball.model.dto.data.BatterBasicSeasonRecordDO
 import com.plan.baseball.model.dto.data.BatterBasicSeasonRecordRepository
+import com.plan.baseball.model.dto.team.TeamDO
 import com.plan.baseball.model.dto.team.TeamRepository
 import com.plan.baseball.model.dto.team.UserTeamDO
 import com.plan.baseball.model.dto.team.UserTeamRepository
@@ -27,10 +28,12 @@ class CrawlingTest(
     }
 
     @Test
-    fun makeUserTeam(){
+    fun makeUsrTeam(){
         val userTeamDO = UserTeamDO(
-            userInfoDO = userInfoRepository.findById("wkdgyfla97@naver.com").orElseThrow(),
-            teamDO = teamRepository.findById(1L).orElseThrow()
+            userInfoDO = userInfoRepository.findById("tester+1@naver.com").orElseThrow(),
+            teamDO = teamRepository.findById(2L).orElseThrow(),
+            role = "PLAYER",
+            backNumber = 33
         )
         userTeamRepository.save(userTeamDO)
     }
@@ -40,6 +43,14 @@ class CrawlingTest(
         "http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=2023"
         )
         return crawlingService.loadBatterData()
+    }
+
+    @Test
+    fun createTeam(){
+        val team:TeamDO = TeamDO(
+            name = "Sol",
+        )
+        teamRepository.save(team)
     }
 
     @Test
@@ -58,8 +69,18 @@ class CrawlingTest(
                 bb = item[18].toInt(),
                 kk = item[21].toInt()
             )
-            //println(tmpBasicDo.toString())
             batterBasicSeasonRecordRepository.save(tmpBasicDo)
         }
+    }
+
+    @Test
+    fun selectThatPlayer(){
+        //TODO: 팀 등록시에 번호 체크하고 나서 등록하도록 해야합니다!
+        val teamId = 1L
+        val backNumber = 0
+
+        println(
+            userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(teamId, backNumber)
+        )
     }
 }

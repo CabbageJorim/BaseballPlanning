@@ -25,6 +25,22 @@ class UserInfoDOUnitTest(
         userInfoRepository.save(userData)
     }
 
+    @Test
+    fun createData() {
+        for(i: Int in 1..1000){
+            val userData = UserInfoDO(
+                "test+${i}@naver.com",
+                passwordEncoder.encode("1234"),
+                "Tester+${i}",
+                getCalendar(1999,9,9),
+                "111+${i}",
+                LocalDateTime.now()
+            )
+            userInfoRepository.save(userData)
+        }
+
+    }
+
     private fun getCalendar(year: Int, month: Int, date: Int): Calendar {
         val calendar = Calendar.getInstance()
         calendar.set(year, month, date)
