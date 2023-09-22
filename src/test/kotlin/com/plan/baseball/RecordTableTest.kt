@@ -12,15 +12,12 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.LocalDateTime
 import java.util.*
-import com.plan.baseball.model.dto.team.UserTeamDO as TeamEntry
 
 @SpringBootTest
 class RecordTableTest(
     @Autowired val passwordEncoder: PasswordEncoder,
     @Autowired private val userInfoRepository: UserInfoRepository,
     @Autowired private val teamRepository: TeamRepository,
-    @Autowired private val userTeamRepository: UserTeamRepository,
-    @Autowired private val batterBasicSeasonRecordRepository: BatterBasicSeasonRecordRepository
 ) {
     @Test
     fun createUser(){
@@ -43,22 +40,9 @@ class RecordTableTest(
 
     @Test
     fun createTeam(){
-        val team:TeamDO = TeamDO(
+        val team = TeamDO(
             name = "secondTeam"
         )
         teamRepository.save(team)
     }
-
-    @Test
-    fun createEntry(){
-        println(userInfoRepository.findByEmail("wkdgyfla97@naver.com"))
-        println(teamRepository.findById(1).get())
-        val entry =
-            TeamEntry(
-                userInfoDO = userInfoRepository.findByEmail("wkdgyfla97@naver.com"),
-                teamDO = teamRepository.findById(2).get()
-            )
-        userTeamRepository.save(entry)
-    }
-
 }

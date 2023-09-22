@@ -1,14 +1,13 @@
 package com.plan.baseball.model.service
 
 import org.jsoup.Jsoup
-import java.io.BufferedWriter
-import java.io.FileWriter
 import java.lang.StringBuilder
 
 class CrawlingService(
     private var teamURL: String
 ) {
-    fun loadBatterData(){
+    fun loadBatterData(): MutableList<List<String>>{
+        val resultList: MutableList<List<String>> = mutableListOf()
         val doc = Jsoup.connect(this.teamURL).get()
         val table = doc.select("table")
 
@@ -22,19 +21,22 @@ class CrawlingService(
             }
             csvLine.deleteCharAt(csvLine.length - 1)
             val itemList = csvLine.split(",")
-            println(itemList)
 
             when{
-                (itemList[0] == "순위") -> continue
+                (itemList[0] == "순위") -> {
+                    println(itemList)
+                    continue
+                }
                 else -> {
-                    val nameSplit = itemList[1].split("(")
-                    println(nameSplit[0])
-                    println(nameSplit[1].substring(0,nameSplit[1].length-1))
-                    println("line lastIndex: ${itemList.lastIndex}")
-                    println("line size: ${itemList.size}")
+                    resultList += itemList
+//                    val nameSplit = itemList[1].split("(")
+//                    println(nameSplit[0])
+//                    println(nameSplit[1].substring(0,nameSplit[1].length-1))
+//                    println("line lastIndex: ${itemList.lastIndex}")
+//                    println("line size: ${itemList.size}")
                 }
             }
         }
-
+        return resultList
     }
 }

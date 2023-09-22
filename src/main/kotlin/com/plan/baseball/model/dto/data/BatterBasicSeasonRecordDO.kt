@@ -10,7 +10,7 @@ data class BatterBasicSeasonRecordDO(
     var id:Long? = 0L, //고작해봐야 이건데, 이거 알아내는데 시간 너무 먹었습니다ㅠㅠㅠㅠ
 
     @ManyToOne(targetEntity = UserTeamDO::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    @JoinColumn(name="ENTRY_ID", nullable = false)
+    @JoinColumn(name="USERTEAM_ID", nullable = false)
     val userTeamDO: UserTeamDO,
 
     @Column(name="GAME", nullable = false)
