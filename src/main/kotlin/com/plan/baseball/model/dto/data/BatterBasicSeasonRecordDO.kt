@@ -1,18 +1,17 @@
 package com.plan.baseball.model.dto.data
 
-import com.plan.baseball.model.dto.team.Entry
-import com.plan.baseball.model.dto.user_info.UserInfoDO
+import com.plan.baseball.model.dto.team.UserTeamDO
 import javax.persistence.*
 
 @Entity
 @Table(name = "S_B_BASIC")//테이블 명: SEASON_BATTER_BASIC
-data class BatterBasicSeasonRecord(
+data class BatterBasicSeasonRecordDO(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long? = 0L, //고작해봐야 이건데, 이거 알아내는데 시간 너무 먹었습니다ㅠㅠㅠㅠ
 
-    @ManyToOne(targetEntity = Entry::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(targetEntity = UserTeamDO::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name="ENTRY_ID", nullable = false)
-    val entry: Entry,
+    val userTeamDO: UserTeamDO,
 
     @Column(name="GAME", nullable = false)
     val game:Int,   //출장수

@@ -1,17 +1,17 @@
 package com.plan.baseball.model.dto.data
 
-import com.plan.baseball.model.dto.team.Entry
+import com.plan.baseball.model.dto.team.UserTeamDO
 import javax.persistence.*
 
 @Entity
 @Table(name="S_B_DETAIL")
-data class BatterDetailSeasonRecord (
+data class BatterDetailSeasonRecordDO (
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long? = 0L,
 
-    @ManyToOne(targetEntity = Entry::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(targetEntity = UserTeamDO::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(name="ENTRY_ID", nullable = false)
-    val entry: Entry,
+    val userTeamDO: UserTeamDO,
 
     @Column(name="SINGLE_HIT", nullable = false)
     val singleHit: Int,   //1루타 -> 중요도 떨어짐

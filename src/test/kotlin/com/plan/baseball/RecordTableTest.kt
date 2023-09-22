@@ -1,7 +1,7 @@
 package com.plan.baseball
 
 import com.plan.baseball.model.dto.data.BatterBasicSeasonRecordRepository
-import com.plan.baseball.model.dto.team.EntryRepository
+import com.plan.baseball.model.dto.team.UserTeamRepository
 import com.plan.baseball.model.dto.team.TeamDO
 import com.plan.baseball.model.dto.team.TeamRepository
 import com.plan.baseball.model.dto.user_info.UserInfoDO
@@ -12,14 +12,14 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.security.crypto.password.PasswordEncoder
 import java.time.LocalDateTime
 import java.util.*
-import com.plan.baseball.model.dto.team.Entry as TeamEntry
+import com.plan.baseball.model.dto.team.UserTeamDO as TeamEntry
 
 @SpringBootTest
 class RecordTableTest(
     @Autowired val passwordEncoder: PasswordEncoder,
     @Autowired private val userInfoRepository: UserInfoRepository,
     @Autowired private val teamRepository: TeamRepository,
-    @Autowired private val entryRepository: EntryRepository,
+    @Autowired private val userTeamRepository: UserTeamRepository,
     @Autowired private val batterBasicSeasonRecordRepository: BatterBasicSeasonRecordRepository
 ) {
     @Test
@@ -58,7 +58,7 @@ class RecordTableTest(
                 userInfoDO = userInfoRepository.findByEmail("wkdgyfla97@naver.com"),
                 teamDO = teamRepository.findById(2).get()
             )
-        entryRepository.save(entry)
+        userTeamRepository.save(entry)
     }
 
 }
