@@ -22,7 +22,7 @@ class RecordTableTest(
     @Test
     fun createUser(){
         val userData = UserInfoDO(
-            "wkdgyfla97@naver.com", passwordEncoder.encode("1234"), "Jorim", getCalendar(2000, 3, 30),"01085945143", LocalDateTime.now()
+            "lsd@naver.com", passwordEncoder.encode("1234"), "Jorim", getCalendar(1997, 3, 30),"01085945142", LocalDateTime.now()
         )
         userInfoRepository.save(userData)
     }
@@ -41,7 +41,7 @@ class RecordTableTest(
     @Test
     fun createTeam(){
         val team = TeamDO(
-            name = "secondTeam"
+            name = "Guro Twins"
         )
         teamRepository.save(team)
     }

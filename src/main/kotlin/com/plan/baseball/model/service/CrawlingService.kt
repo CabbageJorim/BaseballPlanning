@@ -24,16 +24,10 @@ class CrawlingService(
 
             when{
                 (itemList[0] == "순위") -> {
-                    println(itemList)
                     continue
                 }
                 else -> {
                     resultList += itemList
-//                    val nameSplit = itemList[1].split("(")
-//                    println(nameSplit[0])
-//                    println(nameSplit[1].substring(0,nameSplit[1].length-1))
-//                    println("line lastIndex: ${itemList.lastIndex}")
-//                    println("line size: ${itemList.size}")
                 }
             }
         }

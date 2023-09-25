@@ -14,23 +14,23 @@ data class BatterBasicSeasonRecordDO(
     val userTeamDO: UserTeamDO,
 
     @Column(name="GAME", nullable = false)
-    val game:Int,   //출장수
+    var game:Int,   //출장수
     @Column(name="PA", nullable = false)
-    val pa:Int,     //타석 Plate Appearance
+    var pa:Int,     //타석 Plate Appearance
     @Column(name="AB", nullable = false)
-    val ab:Int,     //타수 At Bat
+    var ab:Int,     //타수 At Bat
     @Column(name="RUN", nullable = false)
-    val run:Int,    //득점
+    var run:Int,    //득점
     @Column(name="HIT", nullable = false)
-    val hit:Int,    //총안타
+    var hit:Int,    //총안타
     @Column(name="HOMERUN", nullable = false)
-    val homerun: Int,    //홈런
+    var homerun: Int,    //홈런
     @Column(name="RBI", nullable = false)
-    val rbi: Int,        //타점
+    var rbi: Int,        //타점
     @Column(name="SB", nullable = false)
-    val sb: Int,     //도루
+    var sb: Int,     //도루
     @Column(name="BB", nullable = false)
-    val bb: Int,         //볼넷
+    var bb: Int,         //볼넷
     @Column(name="KK", nullable = false)
-    val kk: Int        //삼진
+    var kk: Int        //삼진
 )
