@@ -41,7 +41,7 @@ class RecordTableTest(
     @Test
     fun createTeam(){
         val team = TeamDO(
-            name = "Guro Twins"
+            name = "GwanAk pirates"
         )
         teamRepository.save(team)
     }

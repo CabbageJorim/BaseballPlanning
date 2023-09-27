@@ -27,9 +27,9 @@ class UserInfoDOUnitTest(
 
     @Test
     fun createData() {
-        for(i: Int in 1..1000){
+        for(i: Int in 1..6){
             val userData = UserInfoDO(
-                "test+${i}@naver.com",
+                "test${i}@naver.com",
                 passwordEncoder.encode("1234"),
                 "Tester+${i}",
                 getCalendar(1999,9,9),

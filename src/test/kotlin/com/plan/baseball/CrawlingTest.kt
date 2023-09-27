@@ -6,8 +6,10 @@ import com.plan.baseball.model.dto.team.TeamDO
 import com.plan.baseball.model.dto.team.TeamRepository
 import com.plan.baseball.model.dto.team.UserTeamDO
 import com.plan.baseball.model.dto.team.UserTeamRepository
+import com.plan.baseball.model.dto.user_info.UserInfoDO
 import com.plan.baseball.model.dto.user_info.UserInfoRepository
 import com.plan.baseball.model.service.CrawlingService
+import com.plan.baseball.model.service.MyTeamService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -18,7 +20,8 @@ class CrawlingTest(
     @Autowired val batterBasicSeasonRecordRepository: BatterBasicSeasonRecordRepository,
     @Autowired val userInfoRepository: UserInfoRepository,
     @Autowired val teamRepository: TeamRepository,
-    @Autowired val userTeamRepository: UserTeamRepository
+    @Autowired val userTeamRepository: UserTeamRepository,
+    @Autowired val myTeamService: MyTeamService
 ) {
     @Test
     fun crawlingTeam(){
@@ -32,12 +35,26 @@ class CrawlingTest(
     fun makeUsrTeam(){
         val userTeamDO = UserTeamDO(
             userInfoDO = userInfoRepository.findById("wkdgyfla97@naver.com").orElseThrow(),
-            teamDO = teamRepository.findById(1L).orElseThrow(),
+            teamDO = teamRepository.findById(3L).orElseThrow(),
             role = "PLAYER",
             backNumber = 89,
             //batterBasicSeasonRecordDO = listOf()
         )
         userTeamRepository.save(userTeamDO)
+    }
+
+    @Test
+    fun createUserTeam(){
+        val numList = listOf(0, 60, 1, 84, 16, 66, 8)
+        for(i in 1 .. 6){
+            val userData = UserTeamDO(
+                userInfoDO = userInfoRepository.findById("test${i}@naver.com").orElseThrow(),
+                teamDO = teamRepository.findById(1L).orElseThrow(),
+                role = "PLAYER",
+                backNumber = numList[i]
+            )
+            userTeamRepository.save(userData)
+        }
     }
 
     @Test
@@ -53,45 +70,16 @@ class CrawlingTest(
         getData().forEach { item ->
             runCatching {
                 val userTeamEntity = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1]))[0]
-                println(userTeamEntity)
                 val entityData = userTeamEntity.id?.let {
-                    id -> batterBasicSeasonRecordRepository.findByUserTeamDOIdAndSeason(id, 2023)
-                }
-                if (entityData != null) {
-                    println(entityData.isEmpty)
+                    id -> batterBasicSeasonRecordRepository.findByUserTeamDOIdAndSeason(id, 2022)
                 }
 
-                entityData?.let { data ->
-                    if (data.isEmpty) {
-                        println("store")
-                        storeData(item)
-                    } else {
-                        println("update")
-                        updateData(data.get(), item)
-                    }
-                } ?: run {
-                    println("store")
-                    storeData(item)
-                }
+                entityData?.let {
+                    data -> if (data.isEmpty) storeData(item) else updateData(data.get(), item)
+                } ?: run { storeData(item) }
 
-//                entityData?.ifPresent{
-//                    updateData(it, item)
-//                }?: storeData(item)
             } //예외를 무시하는 것이 기본동작이라고 함
         }
-        /*
-            정리
-            - update를 하려면 해당 데이터 객체를 완전히 가져와서 해결해야함
-            - 그렇지 않다면, 서로 다른 id의 데이터로 판단하고 계속 적재를 해버림
-            - 어떻게보면 서로 필요한 데이터일 수도 있지만, 현재 개발 의도는 그 방향이 아니기 때문에 그에 맞는 조건을 걸고 해야할 것
-        */
-
-    }
-
-    @Test
-    fun getTest(){
-        //println(userTeamRepository.findAll())
-        println(userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, 89))
     }
 
     private fun updateData(entityData: BatterBasicSeasonRecordDO, item:List<String>) {
@@ -111,7 +99,7 @@ class CrawlingTest(
     }
     private fun getData(): MutableList<List<String>>{
         val crawlingService = CrawlingService(
-            "http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=2023"
+            "http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=2022"
         )
         return crawlingService.loadBatterData()
     }
@@ -119,7 +107,7 @@ class CrawlingTest(
         println("store")
         val tmpBasicDo = BatterBasicSeasonRecordDO(
             game = item[3].toInt(),
-            season = 2023,
+            season = 2022,
             userTeamDO = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1]))[0],
             pa = item[4].toInt(),
             ab = item[5].toInt(),
@@ -146,7 +134,12 @@ class CrawlingTest(
         val backNumber = 89
 
         println(
-            userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(teamId, backNumber)[0]
+            userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(teamId, backNumber)
         )
+    }
+
+    @Test
+    fun repositoryTest(){
+        println(myTeamService.getMyTeamRecordBySeason(teamId = 1L, season = 2023))
     }
 }

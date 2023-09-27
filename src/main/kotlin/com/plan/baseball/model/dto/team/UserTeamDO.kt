@@ -19,7 +19,4 @@ data class UserTeamDO(
     val role: String,
     @Column(nullable = false)
     val backNumber: Int,
-
-//    @OneToMany(mappedBy = "userTeamDO", fetch = FetchType.EAGER)
-//    val batterBasicSeasonRecordDO: List<BatterBasicSeasonRecordDO>
 )
