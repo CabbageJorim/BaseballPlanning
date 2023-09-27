@@ -13,6 +13,9 @@ data class BatterDetailSeasonRecordDO (
     @JoinColumn(name="ENTRY_ID", nullable = false)
     val userTeamDO: UserTeamDO,
 
+    @Column(name="SEASON", nullable = false)
+    var season:Int,
+
     @Column(name="SINGLE_HIT", nullable = false)
     val singleHit: Int,   //1루타 -> 중요도 떨어짐
     @Column(name="DOUBLE_HIT", nullable = false)

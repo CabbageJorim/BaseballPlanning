@@ -1,7 +1,6 @@
 package com.plan.baseball.model.service
 
 import org.jsoup.Jsoup
-import java.lang.StringBuilder
 
 class CrawlingService(
     private var teamURL: String
@@ -12,23 +11,12 @@ class CrawlingService(
         val table = doc.select("table")
 
         val rowList = table.select("tr")
-        for (row in rowList){
-            val cellList = row.select("th") + row.select("td")
-            val csvLine = StringBuilder()
+        for(row in rowList){
+            val cellList = row.select("th, td")
+            val itemList = cellList.map { it.text() }
 
-            for(cell in cellList){
-                csvLine.append(cell.text()).append(",")
-            }
-            csvLine.deleteCharAt(csvLine.length - 1)
-            val itemList = csvLine.split(",")
-
-            when{
-                (itemList[0] == "순위") -> {
-                    continue
-                }
-                else -> {
-                    resultList += itemList
-                }
+            if(itemList.firstOrNull() != "순위"){
+                resultList.add(itemList)
             }
         }
         return resultList

@@ -23,7 +23,7 @@ class CrawlingTest(
     @Test
     fun crawlingTeam(){
         val crawlingService = CrawlingService(
-            "http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=2022"
+            "http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=2023"
         )
         crawlingService.loadBatterData()
     }
@@ -31,10 +31,11 @@ class CrawlingTest(
     @Test
     fun makeUsrTeam(){
         val userTeamDO = UserTeamDO(
-            userInfoDO = userInfoRepository.findById("lsd@naver.com").orElseThrow(),
+            userInfoDO = userInfoRepository.findById("wkdgyfla97@naver.com").orElseThrow(),
             teamDO = teamRepository.findById(1L).orElseThrow(),
             role = "PLAYER",
-            backNumber = 89
+            backNumber = 89,
+            //batterBasicSeasonRecordDO = listOf()
         )
         userTeamRepository.save(userTeamDO)
     }
@@ -51,15 +52,31 @@ class CrawlingTest(
     fun makeBasicDO(){
         getData().forEach { item ->
             runCatching {
-                val userTeamEntity = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1]))
-                    .orElseThrow()
+                val userTeamEntity = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1]))[0]
+                println(userTeamEntity)
                 val entityData = userTeamEntity.id?.let {
-                    id -> batterBasicSeasonRecordRepository.findByUserTeamDOId(id)
+                    id -> batterBasicSeasonRecordRepository.findByUserTeamDOIdAndSeason(id, 2023)
+                }
+                if (entityData != null) {
+                    println(entityData.isEmpty)
                 }
 
-                entityData?.ifPresent{
-                    updateData(it, item)
-                }?: storeData(item)
+                entityData?.let { data ->
+                    if (data.isEmpty) {
+                        println("store")
+                        storeData(item)
+                    } else {
+                        println("update")
+                        updateData(data.get(), item)
+                    }
+                } ?: run {
+                    println("store")
+                    storeData(item)
+                }
+
+//                entityData?.ifPresent{
+//                    updateData(it, item)
+//                }?: storeData(item)
             } //예외를 무시하는 것이 기본동작이라고 함
         }
         /*
@@ -71,7 +88,14 @@ class CrawlingTest(
 
     }
 
+    @Test
+    fun getTest(){
+        //println(userTeamRepository.findAll())
+        println(userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, 89))
+    }
+
     private fun updateData(entityData: BatterBasicSeasonRecordDO, item:List<String>) {
+        println("update")
         entityData.game = item[3].toInt()
         entityData.pa = item[4].toInt()
         entityData.ab = item[5].toInt()
@@ -87,14 +111,16 @@ class CrawlingTest(
     }
     private fun getData(): MutableList<List<String>>{
         val crawlingService = CrawlingService(
-            "http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=2022"
+            "http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=2023"
         )
         return crawlingService.loadBatterData()
     }
     private fun storeData(item:List<String>){
+        println("store")
         val tmpBasicDo = BatterBasicSeasonRecordDO(
             game = item[3].toInt(),
-            userTeamDO = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1])).orElseThrow(),
+            season = 2023,
+            userTeamDO = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1]))[0],
             pa = item[4].toInt(),
             ab = item[5].toInt(),
             run = item[6].toInt(),
@@ -120,7 +146,7 @@ class CrawlingTest(
         val backNumber = 89
 
         println(
-            userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(teamId, backNumber).get()
+            userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(teamId, backNumber)[0]
         )
     }
 }

@@ -9,9 +9,13 @@ data class BatterBasicSeasonRecordDO(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id:Long? = 0L, //고작해봐야 이건데, 이거 알아내는데 시간 너무 먹었습니다ㅠㅠㅠㅠ
 
-    @ManyToOne(targetEntity = UserTeamDO::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    //@OneToMany(targetEntity = UserTeamDO::class, fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="USERTEAM_ID", nullable = false)
     val userTeamDO: UserTeamDO,
+
+    @Column(name="SEASON", nullable = false)
+    var season:Int,
 
     @Column(name="GAME", nullable = false)
     var game:Int,   //출장수

@@ -1,5 +1,6 @@
 package com.plan.baseball.model.dto.team
 
+import com.plan.baseball.model.dto.data.BatterBasicSeasonRecordDO
 import com.plan.baseball.model.dto.user_info.UserInfoDO
 import javax.persistence.*
 
@@ -17,5 +18,8 @@ data class UserTeamDO(
     @Column(nullable = false, length = 20, name = "ROLE")
     val role: String,
     @Column(nullable = false)
-    val backNumber: Int
+    val backNumber: Int,
+
+//    @OneToMany(mappedBy = "userTeamDO", fetch = FetchType.EAGER)
+//    val batterBasicSeasonRecordDO: List<BatterBasicSeasonRecordDO>
 )
