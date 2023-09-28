@@ -21,8 +21,11 @@ class CrawlingTest(
     @Autowired val userInfoRepository: UserInfoRepository,
     @Autowired val teamRepository: TeamRepository,
     @Autowired val userTeamRepository: UserTeamRepository,
-    @Autowired val myTeamService: MyTeamService
+    @Autowired val myTeamService: MyTeamService,
 ) {
+    /**
+     * 단순 크롤링 테스트
+     */
     @Test
     fun crawlingTeam(){
         val crawlingService = CrawlingService(
@@ -65,13 +68,15 @@ class CrawlingTest(
         teamRepository.save(team)
     }
 
+    val season = 2016
+
     @Test
     fun makeBasicDO(){
         getData().forEach { item ->
             runCatching {
-                val userTeamEntity = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1]))[0]
+                val userTeamEntity = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1])).get()
                 val entityData = userTeamEntity.id?.let {
-                    id -> batterBasicSeasonRecordRepository.findByUserTeamDOIdAndSeason(id, 2022)
+                    id -> batterBasicSeasonRecordRepository.findByUserTeamDOIdAndSeason(id, season)
                 }
 
                 entityData?.let {
@@ -99,7 +104,7 @@ class CrawlingTest(
     }
     private fun getData(): MutableList<List<String>>{
         val crawlingService = CrawlingService(
-            "http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=2022"
+            "http://www.gameone.kr/club/info/ranking/hitter?club_idx=14106&season=${season}"
         )
         return crawlingService.loadBatterData()
     }
@@ -107,8 +112,8 @@ class CrawlingTest(
         println("store")
         val tmpBasicDo = BatterBasicSeasonRecordDO(
             game = item[3].toInt(),
-            season = 2022,
-            userTeamDO = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1]))[0],
+            season = season,
+            userTeamDO = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(1L, getUniformNum(item[1])).get(),
             pa = item[4].toInt(),
             ab = item[5].toInt(),
             run = item[6].toInt(),

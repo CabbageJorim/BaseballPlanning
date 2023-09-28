@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h1 th:text="${playerName}"></h1>
+<table>
+    <thead>
+        <th>시즌</th>
+        <th>경기수</th>
+        <th>타석</th>
+        <th>타수</th>
+        <th>안타</th>
+        <th>홈런</th>
+        <th>타점</th>
+        <th>볼넷</th>
+        <th>삼진</th>
+        <th>득점</th>
+        <th>도루</th>
+    </thead>
+    <tbody>
+        <tr th:each="record: ${recordBySeason}">
+            <td><span th:text="${record.season}"></span></td>
+            <td><span th:text="${record.game}"></span></td>
+            <td><span th:text="${record.pa}"></span></td>
+            <td><span th:text="${record.ab}"></span></td>
+            <td><span th:text="${record.hit}"></span></td>
+            <td><span th:text="${record.homerun}"></span></td>
+            <td><span th:text="${record.rbi}"></span></td>
+            <td><span th:text="${record.bb}"></span></td>
+            <td><span th:text="${record.kk}"></span></td>
+            <td><span th:text="${record.run}"></span></td>
+            <td><span th:text="${record.sb}"></span></td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

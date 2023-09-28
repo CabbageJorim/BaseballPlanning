@@ -26,7 +26,7 @@
         </thead>
         <tbody>
             <tr th:each="record: ${teamSeasonRecord}">
-                <td><span th:text="${record.userTeamDO.userInfoDO.name}"></span></td>
+                <td><a th:href="@{/myteam/detail(teamId=${record.userTeamDO.teamDO.id}, num=${record.userTeamDO.backNumber})}"><span th:text="${record.userTeamDO.userInfoDO.name}"></span></a></td>
                 <td><span th:text="${record.userTeamDO.backNumber}"></span></td>
                 <td><span th:text="${record.game}"></span></td>
                 <td><span th:text="${record.pa}"></span></td>

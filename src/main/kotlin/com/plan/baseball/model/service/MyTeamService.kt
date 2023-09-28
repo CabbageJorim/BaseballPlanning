@@ -4,9 +4,7 @@ import com.plan.baseball.model.dto.data.BatterBasicSeasonRecordDO
 import com.plan.baseball.model.dto.data.BatterBasicSeasonRecordRepository
 import com.plan.baseball.model.dto.team.UserTeamDO
 import com.plan.baseball.model.dto.team.UserTeamRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class MyTeamService(
@@ -27,5 +25,14 @@ class MyTeamService(
                 }
         }
         return recordList
+    }
+
+    fun getMyPlayerRecordBySeason(teamId: Long, num: Int): List<BatterBasicSeasonRecordDO>? {
+        val userTeamId = userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(teamId, num).get().id
+        return userTeamId?.let { batterBasicSeasonRecordRepository.findByUserTeamDOId(it) }
+    }
+
+    fun getMyName(teamId: Long, num: Int): String {
+        return userTeamRepository.findUserTeamByTeamDOIdAndBackNumber(teamId, num).orElseThrow().userInfoDO.name
     }
 }
