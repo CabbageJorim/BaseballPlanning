@@ -19,14 +19,12 @@ class MyTeamController(
     }
 
     @GetMapping("/myteam")
-    fun myTeamDetail(@RequestParam teamId:Long, @RequestParam(defaultValue = 2023.toString()) season:Int, model: Model): String{
-        model.addAttribute("teamSeasonRecord", myTeamService.getMyTeamRecordBySeason(teamId, season))
+    fun myTeamDetail(@RequestParam teamId:Long, model: Model): String{
         return "myTeam/myTeamDetail"
     }
 
     @GetMapping("/myteam/detail")
     fun myTeamPlayerDetail(@RequestParam teamId:Long, @RequestParam num:Int, model: Model): String {
-        //println(myTeamService.getMyPlayerRecordBySeason(teamId, num))
         val recordList = myTeamService.getMyPlayerRecordBySeason(teamId, num)
         model.addAttribute("playerName", myTeamService.getMyName(teamId, num))
         model.addAttribute("recordBySeason", recordList)

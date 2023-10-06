@@ -5,10 +5,23 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:src="@{/javascript/myTeamDetail.js}"></script>
     <title>Document</title>
 </head>
 <body>
     <h1>Detail</h1>
+    <label for="myTeamDetail_select">연도 선택</label>
+    <select name="season" id="myTeamDetail_select">
+        <option value="2023" selected>2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+    </select>
     <table>
         <thead>
             <th>이름</th>
@@ -24,21 +37,8 @@
             <th>득점</th>
             <th>도루</th>
         </thead>
-        <tbody>
-            <tr th:each="record: ${teamSeasonRecord}">
-                <td><a th:href="@{/myteam/detail(teamId=${record.userTeamDO.teamDO.id}, num=${record.userTeamDO.backNumber})}"><span th:text="${record.userTeamDO.userInfoDO.name}"></span></a></td>
-                <td><span th:text="${record.userTeamDO.backNumber}"></span></td>
-                <td><span th:text="${record.game}"></span></td>
-                <td><span th:text="${record.pa}"></span></td>
-                <td><span th:text="${record.ab}"></span></td>
-                <td><span th:text="${record.hit}"></span></td>
-                <td><span th:text="${record.homerun}"></span></td>
-                <td><span th:text="${record.rbi}"></span></td>
-                <td><span th:text="${record.bb}"></span></td>
-                <td><span th:text="${record.kk}"></span></td>
-                <td><span th:text="${record.run}"></span></td>
-                <td><span th:text="${record.sb}"></span></td>
-            </tr>
+        <tbody id="myTeamDetail_tbody">
+
         </tbody>
     </table>
 </body>
