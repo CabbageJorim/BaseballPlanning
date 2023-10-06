@@ -12,7 +12,7 @@
     <div th:each="team : ${myTeamList}">
         <p th:text="${team.id}"></p>
         <p th:text="${team.teamDO}"></p>
-        <p th:text="${team.teamDO.name}"></p>
+        <a th:href="@{/myteam(teamId=${team.id})}"><p th:text="${team.teamDO.name}"></p></a>
         <p th:text="${#temporals.format(team.teamDO.createDate, 'yyyy-MM-dd HH:mm:ss')}"></p>
         <p th:text="${team.role}"></p>
         <p th:text="${team.backNumber}"></p>

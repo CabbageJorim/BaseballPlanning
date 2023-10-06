@@ -1,6 +1,5 @@
 package com.plan.baseball.model.dto.team
 
-import com.plan.baseball.model.dto.data.BatterBasicSeasonRecordDO
 import com.plan.baseball.model.dto.user_info.UserInfoDO
 import javax.persistence.*
 

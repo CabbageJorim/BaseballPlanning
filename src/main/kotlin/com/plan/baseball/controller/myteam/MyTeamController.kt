@@ -19,7 +19,7 @@ class MyTeamController(
     }
 
     @GetMapping("/myteam")
-    fun myTeamDetail(@RequestParam teamId:Long, @RequestParam season:Int, model: Model): String{
+    fun myTeamDetail(@RequestParam teamId:Long, @RequestParam(defaultValue = 2023.toString()) season:Int, model: Model): String{
         model.addAttribute("teamSeasonRecord", myTeamService.getMyTeamRecordBySeason(teamId, season))
         return "myTeam/myTeamDetail"
     }
